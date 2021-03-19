@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DistributorController;
+use App\Http\Controllers\Admin\WarrantyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Warranty
+Route::get('/warranty', 'App\Http\Controllers\Frontend\WarrantyController@index')->name('warranty.index');
+Route::get('/warranty/{rmaId}', 'App\Http\Controllers\Frontend\WarrantyController@show')->name('warranty.show');
+Route::post('/warranty', 'App\Http\Controllers\Frontend\WarrantyController@submit');
+Route::get('/warranty-download/{rmaId}', 'App\Http\Controllers\Frontend\WarrantyController@download');
+
+// Service
+Route::get('/service', 'App\Http\Controllers\Frontend\ServiceController@index')->name('service.index');
+Route::get('/service/{serId}', 'App\Http\Controllers\Frontend\ServiceController@show')->name('service.show');
+Route::post('/service', 'App\Http\Controllers\Frontend\ServiceController@submit');
+Route::get('/service-download/{serId}', 'App\Http\Controllers\Frontend\ServiceController@download');
+
+Route::get('/status', 'App\Http\Controllers\Frontend\SearchController@index')->name('page.status');
+Route::post('/status/check', 'App\Http\Controllers\Frontend\SearchController@check')->name('status.check');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
+    Route::get('/', function () {
+        return view('admin.home');
+    });
+
+    Route::resource('distributors', DistributorController::class);
+    Route::resource('warranties', WarrantyController::class);
+});
 
 require __DIR__.'/auth.php';
