@@ -64,7 +64,7 @@ class WarrantyController extends Controller
     {
         $warranty->update($request->all());
 
-        return redirect()->route('warranties.index')->withSuccess('Berhasil mengupdate '.$warranty->name);
+        return redirect()->route('warranties.index')->withSuccess('Berhasil mengupdate '.$warranty->no);
     }
 
     /**

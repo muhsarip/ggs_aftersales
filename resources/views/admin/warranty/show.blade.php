@@ -7,7 +7,7 @@
     <h2 class="text-center">No : {{$warranty->no}}</h2>
 
     <div class="text-left mb-5">
-        <a href="{{url('admin/distributors/')}}" class="btn btn-warning">Kembali ke list</a>
+        <a href="{{url('admin/warranties/')}}" class="btn btn-warning">Kembali ke list</a>
     </div>
 
     <div class="row mt-4">
