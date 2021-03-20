@@ -14,6 +14,24 @@
         {{session::get('success')}}
     </div>
     @endif
+
+    <form action="/admin/distributors" method="get">
+        <div class="row my-4">
+            <div class="col-lg-6 col-12">
+                <div class="input-group">
+
+                    <input type="text" value="{{request()->keyword}}" name="keyword" class="form-control"
+                        placeholder="Cari dengan Nama Distributor">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <table class="table table-bordered">
         <thead>
             <tr>

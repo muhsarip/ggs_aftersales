@@ -39,6 +39,12 @@
                     <td width="150">Nama Barang</td>
                     <td>: {{$warranty->nama_barang}}</td>
                 </tr>
+                @if ($warranty->type=='warranty')
+                <tr>
+                    <td width="150">Merk Barang</td>
+                    <td>: {{$warranty->merk_barang}}</td>
+                </tr>
+                @endif
                 <tr>
                     <td>Serial Number</td>
                     <td>: {{$warranty->serial_number}}</td>

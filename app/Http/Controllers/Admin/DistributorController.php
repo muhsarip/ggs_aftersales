@@ -13,10 +13,20 @@ class DistributorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $distributors = Distributor::paginate();
-        return view('admin.distributor.index',compact('distributors'));
+        $distributors = Distributor::where("name","!=","");
+
+        // Filter name
+        if($request->keyword != ''){
+            $keyword = "%".$request->keyword."%";
+            $distributors
+                ->where("name","like",$keyword);
+        }
+
+        return view('admin.distributor.index',[
+            'distributors'=>$distributors->paginate()
+        ]);
     }
 
     /**

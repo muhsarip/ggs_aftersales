@@ -79,8 +79,11 @@
         </div>
     </nav>
 
-    <div class="container" style="margin-top:30px;min-height:600px;">
+    <div class="container" style="margin-top:30px;">
         @yield('content')
+    </div>
+    <div class="" style=" margin-top:30px;">
+        @yield('content-dashboard')
     </div>
 
     <div class="jumbotron text-center" style="margin-bottom:0">

@@ -14,10 +14,29 @@ class WarrantyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $warranties = Warranty::paginate();
-        return view('admin.warranty.index',compact('warranties'));
+        $status = config('warranty.status');
+        $warranties = Warranty::with(['distributor']);
+        
+        // Filter keyword
+        if($request->keyword != ''){
+            $keyword = "%".$request->keyword."%";
+            $warranties
+                ->where("rma_id","like",$keyword)
+                ->orWhere("ser_id","like",$keyword)
+                ->orWhere("name","like",$keyword);
+        }
+
+        // Filter status
+        if($request->status != ''){
+            $warranties->where("status",$request->status);
+        }
+        
+        return view('admin.warranty.index',[
+            'warranties'=>$warranties->paginate(),
+            'status'=>$status
+        ]);
     }
 
     /**

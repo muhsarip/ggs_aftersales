@@ -11,22 +11,47 @@
     </div>
     @endif
 
-    <div class="row">
-        <div class="">
+    <form action="/admin/warranties" method="get">
+        <div class="row my-4">
+            <div class="col-lg-6 col-12">
 
+                <div class="form-group">
+                    <select class="form-control" name="status">
+                        <option value="">Semua Status</option>
+                        @foreach ($status as $item)
+                        <option value="{{$item}}" class="text-uppercase" {{$item==request()->status?'selected':''}}>
+                            {{$item}}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="input-group">
+
+                    <input type="text" value="{{request()->keyword}}" name="keyword" class="form-control"
+                        placeholder="Cari dengan No. RMA / No. Service/ Nama Customer">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Type</th>
                     <th>No</th>
                     <th>Nama Customer</th>
-                    <th>No. Telepon</th>
-                    <th>Email</th>
                     <th>Barang</th>
+                    <th>Tanggal Update</th>
                     <th>Status</th>
                     <th width="180"></th>
                 </tr>
@@ -45,22 +70,20 @@
                         {{$warranty->name}}
                     </td>
                     <td>
-                        {{$warranty->phone}}
-                    </td>
-                    <td>
-                        {{$warranty->email}}
-                    </td>
-                    <td>
                         {{$warranty->nama_barang}}
+                    </td>
+                    <td>
+                        {{$warranty->updated_at->format("d F Y \n h:i")}}
                     </td>
                     <td class="text-uppercase">
                         {{$warranty->status}}
                     </td>
                     <td>
-                        <a class="btn btn-info btn-sm" href="{{url('admin/warranties/'.$warranty->id)}}">
+                        <a class="btn btn-info btn-sm mb-2" href="{{url('admin/warranties/'.$warranty->id)}}">
                             <i class="fa fa-search"></i>
                             Detail</a>
-                        <a class="btn btn-primary btn-sm" href="{{url('admin/warranties/'.$warranty->id.'/edit')}}">
+                        <a class="btn btn-primary btn-sm mb-2"
+                            href="{{url('admin/warranties/'.$warranty->id.'/edit')}}">
                             <i class="fa fa-pencil"></i>
                             Edit</a>
                     </td>
@@ -70,7 +93,7 @@
                 @endforeach
                 @if(count($warranties)==0)
                 <tr>
-                    <td colspan="4">Data belum tersedia</td>
+                    <td colspan="8">Data belum tersedia</td>
                 </tr>
                 @endif
 

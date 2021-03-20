@@ -39,9 +39,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
-    Route::get('/', function () {
-        return view('admin.home');
-    });
+    Route::get('/', 'App\Http\Controllers\Admin\HomeController@index');
 
     Route::resource('distributors', DistributorController::class);
     Route::resource('warranties', WarrantyController::class);
