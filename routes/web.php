@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DistributorController;
 use App\Http\Controllers\Admin\WarrantyController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,5 +45,10 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
     Route::resource('distributors', DistributorController::class);
     Route::resource('warranties', WarrantyController::class);
 });
+
+
+Route::get('/shdfdjfowejfjekw', function () {
+    Artisan::call("config:cache");
+})->middleware(['auth']);
 
 require __DIR__.'/auth.php';
