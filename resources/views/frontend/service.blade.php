@@ -20,15 +20,7 @@ Service
         <div class="border p-3 mb-2">
             <h4>Syarat dan Ketentuan Service:</h4>
             <div>
-                <ul>
-                    <li>User berkwajiban untuk membayarkan ongkos kirim pulang dan Pergi </li>
-                    <li>User berkewajiban untuk mempacking barang seaman mungkin Kerusakan pada proses pengiriman tidak
-                        menjadi tanggung jawab pihak GOODGAMINGSHOP</li>
-                    <li>User berkewajiban mengirimkan foto Fisik kepada pihak GGS melalui WA disertakan dengan Nomer
-                        Servican yang nantinya akan didapatkan di email anda </li>
-                    <li>User berkewajiban untuk membuat video produknya sebelum barang itu dikirim disertakan dengan
-                        Nomer Servican yang nantinya akan didapatkan di email anda</li>
-                </ul>
+                {!! $setting->term_of_service !!}
             </div>
         </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Libraries\Helper;
+use App\Models\Setting;
 use App\Models\Warranty;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -11,7 +12,9 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     public function index(){
-        return view('frontend.service');
+        $setting = Setting::find(1);
+
+        return view('frontend.service',compact('setting'));
     }
 
     public function submit(Request $request){

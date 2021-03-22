@@ -20,17 +20,7 @@ Warranty
         <div class="border p-3 mb-2">
             <h4>Syarat dan Ketentuan Garansi:</h4>
             <div>
-                <ul>
-                    <li>User harus menyerah barang yang di claim beserta dengan BOX TIDAK ADA BOX = TIDAK BISA DI CLAIM
-                    </li>
-                    <li>User harus menyertakan Struk belanja / bukti pembelian</li>
-                    <li>User harus menyatakan bahwa tidak ada kerusakan fisik sebelum dikirimkan</li>
-                    <li>Kerusakan fisik adalah mutlak tidak bisa di claim Garansi</li>
-                    <li>Apabila terjadi kerusakan fisik dalam proses pengiriman bukan menjadi tanggung GGS</li>
-                    <li>User berkewajiban untuk membayarkan ongkos kirim pulang pergi</li>
-                    <li>User harus mensetujui lama nya proses garansi semua tergantung dari Distributor pemegang Merek
-                        masing masing</li>
-                </ul>
+                {!! $setting->term_of_warranty !!}
             </div>
         </div>
 
