@@ -81,7 +81,7 @@
         </div>
         2021 {{config('app.name')}} - <a href="https://goodgamingshop.com">Good Gaming Shop</a>
     </div>
-
+    @yield('script')
 </body>
 
 </html>

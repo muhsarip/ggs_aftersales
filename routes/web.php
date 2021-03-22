@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DistributorController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\WarrantyController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
 
     Route::resource('distributors', DistributorController::class);
     Route::resource('warranties', WarrantyController::class);
+    Route::resource('settings', SettingController::class);
 });
 
 

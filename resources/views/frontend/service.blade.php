@@ -32,7 +32,19 @@ Service
             </div>
         </div>
 
-        <form method="post" action="{{url('service')}}">
+        <div class="text-center" id="agreeForm">
+            <div class="form-group">
+                <input type="checkbox" id="agree" value="yes">
+                <label for="agree">Saya menyetujui syarat dan ketentuan diatas</label>
+            </div>
+            <div class="text-center">
+                <button id="agreeButton" class="btn btn-primary">Lanjutkan</button>
+            </div>
+        </div>
+
+
+
+        <form method="post" style="display: none;" id="actionForm" action="{{url('service')}}">
             @csrf
             <div class="row mb-5">
                 <div class="col-lg-6 col-12">
@@ -96,4 +108,19 @@ Service
 
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    $("#agreeButton").on("click",function(){
+if($('#agree').is(":checked")){
+    $("#agreeForm").hide();
+    $("#actionForm").show();
+    
+
+}else{
+    alert("Anda harus menyetujui sayarat dan ketentuan diatas untuk melanjutkan pembuatan form.")
+}
+})
+</script>
 @endsection

@@ -34,7 +34,18 @@ Warranty
             </div>
         </div>
 
-        <form method="post" action="{{url('warranty')}}" enctype="multipart/form-data">
+        <div class="text-center" id="agreeForm">
+            <div class="form-group">
+                <input type="checkbox" id="agree" value="yes">
+                <label for="agree">Saya menyetujui syarat dan ketentuan diatas</label>
+            </div>
+            <div class="text-center">
+                <button id="agreeButton" class="btn btn-primary">Lanjutkan</button>
+            </div>
+        </div>
+
+        <form style="display: none;" method="post" id="actionForm" action="{{url('warranty')}}"
+            enctype="multipart/form-data">
             @csrf
             <div class="row mb-5">
                 <div class="col-lg-6 col-12">
@@ -132,4 +143,20 @@ Warranty
 
 </div>
 
+@endsection
+
+
+@section('script')
+<script>
+    $("#agreeButton").on("click",function(){
+        if($('#agree').is(":checked")){
+            $("#agreeForm").hide();
+            $("#actionForm").show();
+            
+   
+        }else{
+            alert("Anda harus menyetujui sayarat dan ketentuan diatas untuk melanjutkan pembuatan form.")
+        }
+    })
+</script>
 @endsection
