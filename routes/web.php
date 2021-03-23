@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
 
 
 Route::get('/shdfdjfowejfjekw', function () {
-    exec('composer dump-autoload');
+    exec('composer dump-autoload -o');
     Artisan::call("config:cache");
 })->middleware(['auth']);
 
