@@ -50,8 +50,8 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
 
 
 Route::get('/shdfdjfowejfjekw', function () {
-    system('composer dump-autoload');
     Artisan::call("config:cache");
+    Artisan::call("comp:dump");
 })->middleware(['auth']);
 
 require __DIR__.'/auth.php';
