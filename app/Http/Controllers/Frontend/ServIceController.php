@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Libraries\Helper;
 use App\Models\Setting;
 use App\Models\Warranty;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -53,17 +52,5 @@ class ServiceController extends Controller
         }
 
         return view('frontend.service-show')->with(compact('data'));
-    }
-
-    public function download(Request $request,$serId){
-        $data = Warranty::where("type","service")->where("ser_id",$serId)->first();
-
-        if(!$data){
-            return abort(404);
-        }
-
-        $pdf = PDF::loadView('frontend.service-print',compact('data'));
-
-        return $pdf->download('service-'.$serId.'.pdf');
     }
 }

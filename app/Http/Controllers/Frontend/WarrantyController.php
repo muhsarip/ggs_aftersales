@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Libraries\Helper;
 use App\Models\Setting;
 use App\Models\Warranty;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class WarrantyController extends Controller
@@ -70,25 +69,5 @@ class WarrantyController extends Controller
         }
 
         return view('frontend.warranty-show')->with(compact('data'));
-    }
-
-    public function download(Request $request,$rmaId){
-        $data = Warranty::where("type","warranty")->where("rma_id",$rmaId)->first();
-
-        if(!$data){
-            return abort(404);
-        }
-
-        $pdf = PDF::loadView('frontend.warranty-print',compact('data'));
-
-        return $pdf->download('rma-'.$rmaId.'.pdf');
-    }
-
-    public function downloadSample(){
-        return view('frontend.print');
-
-        $pdf = PDF::loadView('frontend.print');
-
-        return $pdf->download('rma.pdf');
     }
 }

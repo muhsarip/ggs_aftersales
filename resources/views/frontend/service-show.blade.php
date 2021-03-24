@@ -4,6 +4,12 @@
 Warranty
 @endsection
 
+@section('source')
+<link rel="stylesheet" href="/css/print.min.css">
+<script src="/js/print.min.js"></script>
+@endsection
+
+
 @section('content')
 <div class="row justify-content-md-center">
     <div class="col-lg-12">
@@ -19,9 +25,9 @@ Warranty
                 barang yang akan di kirim ke Toko GGS</p>
 
             <div class="text-center">
-                <a href="{{url('service-download/'.$data->ser_id)}}" target="_blank" class="btn btn-primary btn-lg">
+                <button onclick="printJS('printJS-form', 'html')" target="_blank" class="btn btn-primary btn-lg">
                     <i class="fa fa-print"></i> Cetak Form
-                </a>
+                </button>
             </div>
 
         </div>
@@ -47,6 +53,7 @@ Warranty
                         <td>: {{$data->email}}</td>
                     </tr>
                 </table>
+
             </div>
 
             <div class="col-lg-6 col-12">
@@ -66,8 +73,90 @@ Warranty
                 </table>
             </div>
 
+            <div class="col-lg-12">
+                <div class="alert alert-info font-bold" style="font-size: 20px;padding:20px;margin-top:20px;">
+                    Email : {{$data->email}} <br>
+                    No. Servican : {{$data->ser_id}}
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
+
+
+{{-- PRINT AREA --}}
+<div class="d-none">
+    <div id="printJS-form" style="margin:2% 5% 10% 5%">
+        <table style="width:100%;">
+            <tr>
+                <td style="width: 100px;">
+                    <img src="{{url('images/logo-ggs.png')}}" width="120" alt="">
+                </td>
+                <td>
+                    <h1>Service Information</h1>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <h2 style="padding-left: 5px;">
+            No. SERVICE : <strong>{{$data->ser_id}}</strong>
+        </h2>
+        <table style="width: 100%;font-size:20px;">
+            <tr>
+                <td style="width: 50%">
+                    <table>
+                        <tr>
+                            <td>Nama Pelanggan</td>
+                            <td>: <strong>{{$data->name}}</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td>: <strong>{{$data->address}}</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Telepon</td>
+                            <td>: <strong>{{$data->phone}}</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>: <strong>{{$data->email}}</strong> </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Nama Barang</td>
+                            <td>: <strong>{{$data->nama_barang}}</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Serial Number</td>
+                            <td>: <strong>{{$data->serial_number}}</strong> </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+        <div style="margin-top: 20px;font-size:20px;">
+            <p>Detail Kerusakan</p>
+            <h3><strong>
+                    {{$data->detail_kerusakan}}
+                </strong>
+
+            </h3>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <p>
+                This is text for claim text, so long and can be changed everywhehere
+            </p>
+        </div>
+
+    </div>
+
 </div>
 
 @endsection

@@ -37,6 +37,7 @@
             color: #aaa;
         }
     </style>
+    @yield('source')
 </head>
 
 
