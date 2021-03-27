@@ -33,6 +33,11 @@
                         </option>
                         @endforeach
                     </select>
+
+                    <div class="form-group">
+                        <label for="">Masukan Case ID </label>
+                        <input type="text" class="form-control" name="case_id">
+                    </div>
                 </div>
                 @endif
 

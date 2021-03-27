@@ -44,6 +44,17 @@
                     <td width="150">Merk Barang</td>
                     <td>: {{$warranty->merk_barang}}</td>
                 </tr>
+                @if ($warranty->distributor)
+                <tr>
+                    <td width="150">Dsitributor</td>
+                    <td>: {{$warranty->distributor->name}}</td>
+                </tr>
+                <tr>
+                    <td width="150">Case ID</td>
+                    <td>: {{$warranty->case_id}}</td>
+                </tr>
+                @endif
+
                 @endif
                 <tr>
                     <td>Serial Number</td>

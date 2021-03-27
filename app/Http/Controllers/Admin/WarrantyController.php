@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class WarrantyController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -18,24 +18,24 @@ class WarrantyController extends Controller
     {
         $status = config('warranty.status');
         $warranties = Warranty::with(['distributor']);
-        
+
         // Filter keyword
-        if($request->keyword != ''){
-            $keyword = "%".$request->keyword."%";
+        if ($request->keyword != '') {
+            $keyword = "%" . $request->keyword . "%";
             $warranties
-                ->where("rma_id","like",$keyword)
-                ->orWhere("ser_id","like",$keyword)
-                ->orWhere("name","like",$keyword);
+                ->where("rma_id", "like", $keyword)
+                ->orWhere("ser_id", "like", $keyword)
+                ->orWhere("name", "like", $keyword);
         }
 
         // Filter status
-        if($request->status != ''){
-            $warranties->where("status",$request->status);
+        if ($request->status != '') {
+            $warranties->where("status", $request->status);
         }
-        
-        return view('admin.warranty.index',[
-            'warranties'=>$warranties->paginate(),
-            'status'=>$status
+
+        return view('admin.warranty.index', [
+            'warranties' => $warranties->paginate(),
+            'status' => $status
         ]);
     }
 
@@ -55,9 +55,10 @@ class WarrantyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Warranty $warranty)
+    public function show($id)
     {
-        return view('admin.warranty.show',compact('warranty'));
+        $warranty = Warranty::whereId($id)->with(['distributor'])->first();
+        return view('admin.warranty.show', compact('warranty'));
     }
 
     /**
@@ -69,7 +70,7 @@ class WarrantyController extends Controller
     public function edit(Warranty $warranty)
     {
         $distributors = Distributor::all();
-        return view('admin.warranty.edit',compact('warranty','distributors'));
+        return view('admin.warranty.edit', compact('warranty', 'distributors'));
     }
 
     /**
@@ -83,7 +84,7 @@ class WarrantyController extends Controller
     {
         $warranty->update($request->all());
 
-        return redirect()->route('warranties.index')->withSuccess('Berhasil mengupdate '.$warranty->no);
+        return redirect()->route('warranties.index')->withSuccess('Berhasil mengupdate ' . $warranty->no);
     }
 
     /**

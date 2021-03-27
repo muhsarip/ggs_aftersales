@@ -15,7 +15,8 @@ class WarrantyObserver
      */
     public function created(Warranty $warranty)
     {
-        //
+        $service = new WarrantyService();
+        $service->sendNotification($warranty);
     }
 
     /**
