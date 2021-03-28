@@ -31,6 +31,10 @@ Route::get('/service', 'App\Http\Controllers\Frontend\ServiceController@index')-
 Route::get('/service/{serId}', 'App\Http\Controllers\Frontend\ServiceController@show')->name('service.show');
 Route::post('/service', 'App\Http\Controllers\Frontend\ServiceController@submit');
 
+
+// Upload File
+Route::post('/file/upload', 'App\Http\Controllers\Frontend\FileController@upload')->name('file.upload');
+
 Route::get('/status', 'App\Http\Controllers\Frontend\SearchController@index')->name('page.status');
 Route::post('/status/check', 'App\Http\Controllers\Frontend\SearchController@check')->name('status.check');
 
@@ -38,7 +42,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('/', 'App\Http\Controllers\Admin\HomeController@index');
 
     Route::resource('distributors', DistributorController::class);
@@ -52,4 +56,4 @@ Route::get('/shdfdjfowejfjekw', function () {
     Artisan::call("comp:dump");
 })->middleware(['auth']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

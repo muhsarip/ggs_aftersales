@@ -69,15 +69,18 @@
             @foreach ($widgets as $widget)
             @if (!$widget->isComplete)
             <div class="col-md-4">
-                <div class="card-counter primary">
-                    <i class="fa fa-code-fork"></i>
-                    <span class="count-numbers">
-                        {{$widget->number}}
-                    </span>
-                    <span class="count-name">
-                        {{$widget->label}}
-                    </span>
-                </div>
+                <a href="{{$widget->url}}">
+                    <div class="card-counter primary">
+                        <i class="fa fa-code-fork"></i>
+                        <span class="count-numbers">
+                            {{$widget->number}}
+                        </span>
+                        <span class="count-name">
+                            {{$widget->label}}
+                        </span>
+                    </div>
+                </a>
+
             </div>
             @else
             <div class="col-md-4">

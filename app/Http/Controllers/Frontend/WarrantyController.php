@@ -10,12 +10,14 @@ use Illuminate\Http\Request;
 
 class WarrantyController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $setting = Setting::find(1);
-        return view('frontend.warranty',compact('setting'));
+        return view('frontend.warranty', compact('setting'));
     }
 
-    public function submit(Request $request){
+    public function submit(Request $request)
+    {
         $validated = $request->validate([
             'name'  => 'required',
             'address' => 'required',
@@ -25,9 +27,7 @@ class WarrantyController extends Controller
             'nama_barang' => 'required',
             'serial_number' => 'required',
             'detail_kerusakan' => 'required',
-            'foto_barang_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto_barang_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            "file_nota_pembelian" => "required|mimetypes:application/pdf|max:2048"
+            "file_nota_pembelian" => "required"
         ]);
 
         $data = $request->all();
@@ -37,34 +37,20 @@ class WarrantyController extends Controller
         $data['rma_id'] = Helper::generateCode('warranty');
 
 
-        if($request->has('file_nota_pembelian')){
-            $data['file_nota_pembelian'] = $request->file('file_nota_pembelian')->store('public/files');
-        }
-
-        if($request->has('foto_barang_1')){
-            $data['foto_barang_1'] = $request->file('foto_barang_1')->store('public/files');
-        }
-
-        if($request->has('foto_barang_2')){
-            $data['foto_barang_2'] = $request->file('foto_barang_1')->store('public/files');
-        }
-
-
         $warranty = Warranty::create($data);
 
-        if(!$warranty){
+        if (!$warranty) {
             return redirect(route('warranty.index'))->withErrors(['msg', 'Gagal membuat klaim RMA']);
-            
         }
 
-        return redirect(route('warranty.show',['rmaId'=>$warranty->rma_id]));
-        
+        return response()->json($warranty);
     }
 
-    public function show(Request $request,$rmaId){
-        $data = Warranty::where("type","warranty")->where("rma_id",$rmaId)->first();
+    public function show(Request $request, $rmaId)
+    {
+        $data = Warranty::where("type", "warranty")->where("rma_id", $rmaId)->first();
 
-        if(!$data){
+        if (!$data) {
             return abort(404);
         }
 

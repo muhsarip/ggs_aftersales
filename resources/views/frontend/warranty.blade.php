@@ -41,44 +41,46 @@ Warranty
                 <div class="col-lg-6 col-12">
                     <div class="form-group">
                         <label for="">Nama <sup>*</sup> </label>
-                        <input type="text" class="form-control" name="name" required>
+                        <input type="text" class="form-control" name="name" id="name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Alamat <sup>*</sup></label>
-                        <textarea class="form-control" name="address" required></textarea>
+                        <textarea class="form-control" name="address" id="address" required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="">Telepon <sup>*</sup> </label>
-                        <input type="text" class="form-control" name="phone" required>
+                        <input type="text" class="form-control" name="phone" id="phone" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Email<sup>*</sup></label>
-                        <input type="email" class="form-control" name="email" required>
+                        <input type="email" class="form-control" name="email" id="email" required>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-12">
                     <div class="form-group">
                         <label for="">Nama Barang <sup>*</sup></label>
-                        <input type="text" class="form-control" name="nama_barang" required>
+                        <input type="text" class="form-control" name="nama_barang" id="nama_barang" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Merk Barang <sup>*</sup></label>
-                        <input type="text" class="form-control" name="merk_barang" required>
+                        <input type="text" class="form-control" name="merk_barang" id="merk_barang" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Serial Number <sup>*</sup></label>
-                        <input type="text" class="form-control" name="serial_number" required>
+                        <input type="text" class="form-control" name="serial_number" id="serial_number"
+                            id="serial_number" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Detail Kerusakan <sup>*</sup></label>
-                        <textarea name="detail_kerusakan" class="form-control" rows="5" required></textarea>
+                        <textarea name="detail_kerusakan" id="detail_kerusakan" class="form-control" rows="5"
+                            required></textarea>
                     </div>
 
 
@@ -90,23 +92,24 @@ Warranty
 
                         <div class="form-group col-lg-4 col-12 ">
                             <label for="">Foto Barang (1)</label>
-                            <input type="file" name="foto_barang_1" class="form-control">
+                            @include('components.file-uploader',['id'=>'foto_barang_1'])
                             <small class="text-info">
                                 (Gambar: png / jpg - Max Size 2mb)
                             </small>
                         </div>
                         <div class="form-group col-lg-4 col-12">
                             <label for="">Foto Barang (2)</label>
-                            <input type="file" name="foto_barang_2" class="form-control">
+                            @include('components.file-uploader',['id'=>'foto_barang_2'])
                             <small class="text-info">
                                 (Gambar: png / jpg - Max Size 2mb)
                             </small>
                         </div>
                         <div class="form-group col-lg-4 col-12">
                             <label for="">Nota Pembelian <sup>*</sup></label>
-                            <input type="file" name="file_nota_pembelian" class="form-control" required>
-                            <small class="text-info">(File : pdf - Max Size 2mb)</small>
+                            @include('components.file-uploader',['id'=>'file_nota_pembelian'])
+                            <small class="text-info">(File : png / jpg / pdf - Max Size 2mb)</small>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -148,5 +151,40 @@ Warranty
             alert("Anda harus menyetujui sayarat dan ketentuan diatas untuk melanjutkan pembuatan form.")
         }
     })
+
+
+    $("#actionForm").on("submit",function(e){
+        e.preventDefault()
+        $.LoadingOverlay("show");
+        $.ajax({
+            type: "POST",
+            dataType:"json",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            success: function(response) {
+                $.LoadingOverlay("hide");
+                if(response.rma_id !=undefined){
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Form berhasil dikirim, anda akan di redirect ke halaman baru.',
+                    })
+                    setTimeout(() => {
+                        window.location=`/warranty/${response.rma_id}`
+                    }, 1000);
+                    
+                }
+            },
+            error:function(){
+                $.LoadingOverlay("hide");
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Something went wrong!',
+                })
+            }
+        });
+
+    })
+
+
 </script>
 @endsection

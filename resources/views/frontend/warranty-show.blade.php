@@ -78,6 +78,42 @@ Warranty
                 </div>
             </div>
 
+
+            <div class="col-lg-12 mt-5">
+                <div class="row">
+                    @if ($data->foto_barang_1 != '')
+                    <div class="col-lg-4 border border-secondary">
+                        Foto Barang 1
+
+
+                        <img class="img-fluid" src="{{Storage::url($data->foto_barang_1)}}" alt="">
+
+                    </div>
+                    @endif
+
+                    @if ($data->foto_barang_2 != '')
+                    <div class="col-lg-4 border border-secondary">
+                        Foto Barang 2
+
+
+                        <img class="img-fluid" src="{{Storage::url($data->foto_barang_2)}}" alt="">
+
+                    </div>
+                    @endif
+
+                    @if ($data->file_nota_pembelian != '')
+                    <div class="col-lg-4 border border-secondary">
+                        Nota Pembelian <br>
+
+
+                        <a href="{{Storage::url($data->file_nota_pembelian)}}">Open file new tab</a>
+
+                    </div>
+                    @endif
+
+                </div>
+            </div>
+
         </div>
 
 
