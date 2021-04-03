@@ -10,13 +10,15 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $setting = Setting::find(1);
 
-        return view('frontend.service',compact('setting'));
+        return view('frontend.service', compact('setting'));
     }
 
-    public function submit(Request $request){
+    public function submit(Request $request)
+    {
         $validated = $request->validate([
             'name'  => 'required',
             'address' => 'required',
@@ -25,6 +27,7 @@ class ServiceController extends Controller
             'nama_barang' => 'required',
             'serial_number' => 'required',
             'detail_kerusakan' => 'required',
+            'captcha' => 'required|captcha'
         ]);
 
         $data = $request->all();
@@ -35,19 +38,18 @@ class ServiceController extends Controller
 
         $warranty = Warranty::create($data);
 
-        if(!$warranty){
+        if (!$warranty) {
             return redirect(route('service.index'))->withErrors(['msg', 'Gagal membuat data Service']);
-            
         }
 
-        return redirect(route('service.show',['serId'=>$warranty->ser_id]));
-        
+        return response()->json($warranty);
     }
 
-    public function show(Request $request,$serId){
-        $data = Warranty::where("type","service")->where("ser_id",$serId)->first();
+    public function show(Request $request, $serId)
+    {
+        $data = Warranty::where("type", "service")->where("ser_id", $serId)->first();
 
-        if(!$data){
+        if (!$data) {
             return abort(404);
         }
 

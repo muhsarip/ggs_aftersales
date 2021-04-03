@@ -119,6 +119,12 @@ return [
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
+
+    /**
+     * Captcha
+    */
+    'captcha' => 'Kode captcha yang anda masukan salah, silahkan coba kembali.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -129,6 +135,8 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
+
 
     'custom' => [
         'attribute-name' => [

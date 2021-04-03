@@ -27,6 +27,27 @@
                         {{$setting->term_of_service}}
                     </textarea>
                 </div>
+
+                <div class="p-4 border">
+                    <p class="secondary text-center">Mail Status Text Content</p>
+
+
+                    @for ($i = 0; $i <= 5; $i++)
+                        @php
+                            $name = "mail_text_status_".($i+1);
+                        @endphp
+                        <div class="form-group">
+                            <label for="">
+                                {{config('warranty.status')[$i]}}
+                            </label>
+                            <textarea rows="6" class="form-control" name="{{$name}}">{{$setting->$name}}</textarea>
+                        </div>
+                    @endfor
+
+                    
+
+                </div>
+
                 <div class="my-4 text-right">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

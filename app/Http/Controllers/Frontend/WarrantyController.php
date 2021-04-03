@@ -27,7 +27,8 @@ class WarrantyController extends Controller
             'nama_barang' => 'required',
             'serial_number' => 'required',
             'detail_kerusakan' => 'required',
-            "file_nota_pembelian" => "required"
+            "file_nota_pembelian" => "required",
+            'captcha' => 'required|captcha'
         ]);
 
         $data = $request->all();

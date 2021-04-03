@@ -107,11 +107,67 @@ Warranty
 
                     </p>
                 </div>
+                    @if ($data->case_id != '')
+                    <div class="mt-2 alert alert-success">
+                        <h3>
+                            <strong>NOMOR ID CASE DISTRIBUTOR</strong>
+                        </h3>
+                        <h1>
+                            <i>
+                                <strong>
+                                    {{$data->case_id}}
+                                </strong>
+                            </i> 
+                        </h1>
+                    </div>
+                    @endif
                 @endif
 
                 <br>
             </div>
+
+            <br>
+            <br>
+
+            {{-- Foto --}}
+            <div class="mb-4">
+                <p class="text-secondary">Attachment:</p>
+                <div class="row">
+
+
+                    @if ($data->foto_barang_1 != '')
+                        <div class="col-lg-3 pb-4">
+                            <h3>Foto Barang 1</h3>
+                            <a href="{{Storage::url($data->foto_barang_1)}}" target="_blank">
+                                <img class="img-fluid" src="{{Storage::url($data->foto_barang_1)}}" alt="">
+                            </a>
+                        </div>
+                    @endif
+
+                    @if ($data->foto_barang_2 != '')
+                        <div class="col-lg-3 pb-4">
+                            <h3>Foto Barang 2</h3>
+                            <a href="{{Storage::url($data->foto_barang_2)}}" target="_blank">
+                                <img class="img-fluid" src="{{Storage::url($data->foto_barang_2)}}" alt="">
+                            </a>
+                        </div>
+                    @endif
+
+                    @if ($data->file_nota_pembelian != '')
+                        <div class="col-lg-4 pb-4">
+                            <h3>Nota Pembelian</h3>
+                            <a href="{{Storage::url($data->file_nota_pembelian)}}" target="_blank">
+                                Open file in new tab
+                            </a>
+                        </div>
+                    @endif
+                    
+                </div>
+            </div>
+
             @endif
+
+            
 
 
         </div>

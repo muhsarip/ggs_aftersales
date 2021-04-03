@@ -112,7 +112,30 @@ Warranty
 
                     </div>
                 </div>
+
                 <div class="col-lg-12">
+                    <div class="row justify-content-md-center">
+                        <div class="col-lg-3">
+                            <div class="form-group mt-4 mb-4">
+                                <div class="captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                    <button type="button" class="btn btn-danger" class="reload" id="reload-captcha">
+                                        &#x21bb;
+                                    </button>
+                                </div>
+                            </div>
+                
+                            <div class="form-group mb-4">
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12">
+
+                
                     <p style="color: gray">
                         Note <sup>*</sup> : wajib diisi
                     </p>
@@ -174,11 +197,21 @@ Warranty
                     
                 }
             },
-            error:function(){
+            error:function(data){
                 $.LoadingOverlay("hide");
+
+                var response = JSON.parse(data.responseText);
+                var errorString = '';
+                $.each( response.errors, function( key, value) {
+                    errorString += '' + value + '. ';
+                });
+                errorString += '';
+
+                $('#reload-captcha').click()
+
                 Swal.fire({
                     icon: 'error',
-                    text: 'Something went wrong!',
+                    text: errorString,
                 })
             }
         });

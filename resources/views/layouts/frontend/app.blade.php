@@ -168,16 +168,33 @@
                             }
                         }
 
-                        Swal.fire({
-                            icon: 'error',
-                            text: errorDisplay,
-                        })
-                        
+                        if(errorDisplay.includes("CSRF")){
+                            Swal.fire({
+                                icon: 'error',
+                                text: "Maaf sesi anda telah berakhir, silahkan refresh browser anda terlebih dahulu.",
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                text: errorDisplay,
+                            })
+                        }  
                     }
                 });
             }else{
-            alert("Please select a file.");
+                alert("Please select a file.");
             }
+        });
+
+
+        $('#reload-captcha').on("click",function () {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function (data) {
+                    $(".captcha span").html(data.captcha);
+                }
+            });
         });
     </script>
 </body>

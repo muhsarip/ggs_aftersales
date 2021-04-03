@@ -36,7 +36,7 @@ Service
 
 
 
-        <form method="post" style="display: none;" id="actionForm" action="{{url('service')}}">
+        <form method="post" style="display: none;" method="post" id="actionForm" action="{{url('service')}}">
             @csrf
             <div class="row mb-5">
                 <div class="col-lg-6 col-12">
@@ -79,6 +79,26 @@ Service
 
 
                 </div>
+
+                <div class="col-lg-12">
+                    <div class="row justify-content-md-center">
+                        <div class="col-lg-3">
+                            <div class="form-group mt-4 mb-4">
+                                <div class="captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                    <button type="button" class="btn btn-danger" class="reload" id="reload-captcha">
+                                        &#x21bb;
+                                    </button>
+                                </div>
+                            </div>
+                
+                            <div class="form-group mb-4">
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-12">
                     <p style="color: gray">
                         Note <sup>*</sup> : wajib diisi
@@ -105,14 +125,56 @@ Service
 @section('script')
 <script>
     $("#agreeButton").on("click",function(){
-if($('#agree').is(":checked")){
-    $("#agreeForm").hide();
-    $("#actionForm").show();
-    
+        if($('#agree').is(":checked")){
+            $("#agreeForm").hide();
+            $("#actionForm").show();
+            
 
-}else{
-    alert("Anda harus menyetujui sayarat dan ketentuan diatas untuk melanjutkan pembuatan form.")
-}
-})
+        }else{
+            alert("Anda harus menyetujui sayarat dan ketentuan diatas untuk melanjutkan pembuatan form.")
+        }
+    })
+
+    $("#actionForm").on("submit",function(e){
+        e.preventDefault()
+        $.LoadingOverlay("show");
+        $.ajax({
+            type: "POST",
+            dataType:"json",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            success: function(response) {
+                $.LoadingOverlay("hide");
+                if(response.ser_id !=undefined){
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Form berhasil dikirim, anda akan di redirect ke halaman baru.',
+                    })
+                    setTimeout(() => {
+                        window.location=`/service/${response.ser_id}`
+                    }, 1000);
+                    
+                }
+            },
+            error:function(data){
+                $.LoadingOverlay("hide");
+
+                var response = JSON.parse(data.responseText);
+                var errorString = '';
+                $.each( response.errors, function( key, value) {
+                    errorString += '' + value + '. ';
+                });
+                errorString += '';
+
+                $('#reload-captcha').click()
+
+                Swal.fire({
+                    icon: 'error',
+                    text: errorString,
+                })
+            }
+        });
+
+    })
 </script>
 @endsection

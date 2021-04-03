@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 return [
-    "status"=>[
+    "status" => [
         "DATA MASUK / BARANG DALAM PERJALANAN",
         "BARANG SUDAH DITERIMA GGS ",
         "BARANG SEDANG PROSES GARANSI",
+        "BARANG DALAM PROSES SERVICAN GGS",
         "BARANG SUDAH SELESAI DI PROSES DAN KEMBALI KE GGS",
         "BARANG SUDAH DIKIRMKAN KE USER / SELESAI",
     ]

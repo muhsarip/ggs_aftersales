@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DistributorController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\WarrantyController;
+use App\Http\Controllers\CaptchaServiceController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::resource('warranties', WarrantyController::class);
     Route::resource('settings', SettingController::class);
 });
+
+
+// Captcha
+Route::get('/contact-form', [CaptchaServiceController::class, 'index']);
+Route::post('/captcha-validation', [CaptchaServiceController::class, 'captchaFormValidate']);
+Route::get('/reload-captcha', [CaptchaServiceController::class, 'reloadCaptcha']);
 
 
 Route::get('/shdfdjfowejfjekw', function () {
