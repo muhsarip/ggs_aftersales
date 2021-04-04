@@ -10,8 +10,7 @@
     <p>Halo <strong>{{$warranty->name}},</strong></p>
     <br>
     <p>
-        Barang kamu dalam status <strong style="text-transform: uppercase;"> {{ $warranty->status }} </strong>. Terima
-        kasih telah menggunakan sistem {{config('app.name')}}.
+        {{$text}}
     </p>
     <br>
     <p>Salam hormat,</p>
