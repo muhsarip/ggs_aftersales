@@ -135,6 +135,9 @@ Service
         }
     })
 
+    // override img elem to be responsive
+    $("img").addClass("img-fluid")
+
     $("#actionForm").on("submit",function(e){
         e.preventDefault()
         $.LoadingOverlay("show");
