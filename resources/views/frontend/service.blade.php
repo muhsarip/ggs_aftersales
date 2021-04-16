@@ -19,7 +19,7 @@ Service
 
         <div class="border p-3 mb-2">
             <h4>Syarat dan Ketentuan Service:</h4>
-            <div>
+            <div id="term-elem">
                 {!! $setting->term_of_service !!}
             </div>
         </div>
@@ -178,6 +178,36 @@ Service
             }
         });
 
+
+        
+
     })
+
+
+    // Add media query to image
+    $("#term-elem").each(function () {
+        let termMobile = $(this).find("img:eq(0)");
+        if(termMobile){
+            termMobile.addClass("d-sm-block d-md-none")
+        }
+        
+
+        let termDesktop = $(this).find("img:eq(1)");
+        if(termDesktop){
+            termDesktop.addClass("d-none d-md-block")
+        }
+
+        let contentMobile = $(this).find("img:eq(2)");
+        if(contentMobile){
+            contentMobile.addClass("d-sm-block d-md-none")
+        }
+        
+
+        let contentDesktop = $(this).find("img:eq(3)");
+        if(contentDesktop){
+            contentDesktop.addClass("d-none d-md-block")
+        }
+        
+    });
 </script>
 @endsection

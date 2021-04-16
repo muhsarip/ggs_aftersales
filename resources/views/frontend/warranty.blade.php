@@ -19,7 +19,7 @@ Warranty
 
         <div class="border p-3 mb-2">
             <h4>Syarat dan Ketentuan Garansi:</h4>
-            <div>
+            <div id="term-elem">
                 {!! $setting->term_of_warranty !!}
             </div>
         </div>
@@ -164,6 +164,7 @@ Warranty
 
 @section('script')
 <script>
+    // Toggle Form
     $("#agreeButton").on("click",function(){
         if($('#agree').is(":checked")){
             $("#agreeForm").hide();
@@ -179,6 +180,7 @@ Warranty
     $("img").addClass("img-fluid")
 
 
+    // Submit Form
     $("#actionForm").on("submit",function(e){
         e.preventDefault()
         $.LoadingOverlay("show");
@@ -220,6 +222,33 @@ Warranty
         });
 
     })
+
+
+    // Add media query to image
+    $("#term-elem").each(function () {
+        let termMobile = $(this).find("img:eq(0)");
+        if(termMobile){
+            termMobile.addClass("d-sm-block d-md-none")
+        }
+        
+
+        let termDesktop = $(this).find("img:eq(1)");
+        if(termDesktop){
+            termDesktop.addClass("d-none d-md-block")
+        }
+
+        let contentMobile = $(this).find("img:eq(2)");
+        if(contentMobile){
+            contentMobile.addClass("d-sm-block d-md-none")
+        }
+        
+
+        let contentDesktop = $(this).find("img:eq(3)");
+        if(contentDesktop){
+            contentDesktop.addClass("d-none d-md-block")
+        }
+        
+    });
 
 
 </script>
