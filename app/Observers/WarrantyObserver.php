@@ -16,6 +16,7 @@ class WarrantyObserver
     public function created(Warranty $warranty)
     {
         $service = new WarrantyService();
+        $warranty->load(['distributor']);
         $service->sendNotification($warranty);
     }
 
@@ -28,6 +29,7 @@ class WarrantyObserver
     public function updated(Warranty $warranty)
     {
         $service = new WarrantyService();
+        $warranty->load(['distributor']);
         $service->sendNotification($warranty);
     }
 

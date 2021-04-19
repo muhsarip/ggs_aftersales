@@ -20,6 +20,21 @@
                     <input type="text" class="form-control" readonly value="{{$warranty->no}}">
                 </div>
 
+                <div class="form-group">
+                    <label for="">Nama Barang</label>
+                    <input type="text" class="form-control" readonly value="{{$warranty->nama_barang}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Merk Barang</label>
+                    <input type="text" class="form-control" readonly value="{{$warranty->merk_barang}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Detail Kerusakan</label>
+                    <textarea class="form-control" readonly>{{$warranty->detail_kerusakan}}</textarea>
+                </div>
+
 
                 @if ($warranty->type == 'warranty')
                 <div class="form-group">
@@ -36,7 +51,7 @@
 
                     <div class="form-group">
                         <label for="">Masukan Case ID </label>
-                        <input type="text" class="form-control" name="case_id">
+                        <input type="text" class="form-control" name="case_id" value="{{ $warranty->case_id }}">
                     </div>
                 </div>
                 @endif
