@@ -58,7 +58,7 @@
 
                 <div class="form-group">
                     <label for="">Status</label>
-                    <select name="status" class="form-control" value="{{$status}}">
+                    <select name="status" class="form-control" value="{{$warranty->status}}">
                         @foreach (config('warranty.status') as $status)
                         <option {{($warranty->status == $status?'selected':'')}}>
                             {{$status}}
