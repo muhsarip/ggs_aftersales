@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DistributorController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\WarrantyController;
 use App\Http\Controllers\CaptchaServiceController;
@@ -49,6 +50,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::resource('distributors', DistributorController::class);
     Route::resource('warranties', WarrantyController::class);
     Route::resource('settings', SettingController::class);
+
+    Route::resource('profiles', ProfileController::class);
+
+    Route::get('/password', 'App\Http\Controllers\Admin\ProfileController@password')->name('change-password.index');
+    Route::put('/password/{user}', 'App\Http\Controllers\Admin\ProfileController@changePassword')->name('change-password.update');
 });
 
 

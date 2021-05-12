@@ -2,6 +2,14 @@
 
 @section('title','Detail')
 
+@section('source')
+<!-- Magnific Popup core CSS file -->
+<link rel="stylesheet" href="/css/magnific-popup.css">
+
+<!-- Magnific Popup core JS file -->
+<script src="/js/jquery.magnific-popup.js"></script>
+@endsection
+
 @section('content')
 <div>
     <h2 class="text-center">No : {{$warranty->no}}</h2>
@@ -73,8 +81,10 @@
                 <div class="col-lg-4 border border-secondary">
                     Foto Barang 1
 
+                    <a class="popup-link" href="{{Storage::url($warranty->foto_barang_1)}}">
+                        <img class="img-fluid" src="{{Storage::url($warranty->foto_barang_1)}}" alt="">
+                    </a>
 
-                    <img class="img-fluid" src="{{Storage::url($warranty->foto_barang_1)}}" alt="">
 
                 </div>
                 @endif
@@ -83,8 +93,9 @@
                 <div class="col-lg-4 border border-secondary">
                     Foto Barang 2
 
-
-                    <img class="img-fluid" src="{{Storage::url($warranty->foto_barang_2)}}" alt="">
+                    <a class="popup-link" href="{{Storage::url($warranty->foto_barang_2)}}">
+                        <img class="img-fluid" src="{{Storage::url($warranty->foto_barang_2)}}" alt="">
+                    </a>
 
                 </div>
                 @endif
@@ -105,4 +116,15 @@
     </div>
 
 </div>
+@endsection
+
+
+@section('script')
+<script>
+    $('.popup-link').magnificPopup({
+  type: 'image'
+  // other options
+});
+</script>
+
 @endsection
