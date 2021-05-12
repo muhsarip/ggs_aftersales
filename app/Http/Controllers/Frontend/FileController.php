@@ -22,7 +22,7 @@ class FileController extends Controller
     public function upload(Request $request)
     {
         $validated = $request->validate([
-            'file' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf|max:6048',
+            'file' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf|max:10240',
         ]);
 
         $fileName = "";
