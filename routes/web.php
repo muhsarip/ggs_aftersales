@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DistributorController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\WarrantyController;
 use App\Http\Controllers\CaptchaServiceController;
+use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +30,8 @@ Route::get('/', function () {
 Route::get('/warranty', 'App\Http\Controllers\Frontend\WarrantyController@index')->name('warranty.index');
 Route::get('/warranty/{rmaId}', 'App\Http\Controllers\Frontend\WarrantyController@show')->name('warranty.show');
 Route::post('/warranty', 'App\Http\Controllers\Frontend\WarrantyController@submit');
+Route::post('/warranty', 'App\Http\Controllers\Frontend\WarrantyController@submit');
+Route::get('/categories/{category}/brands', [FrontendCategoryController::class, 'brands']);
 
 // Service
 Route::get('/service', 'App\Http\Controllers\Frontend\ServiceController@index')->name('service.index');
@@ -46,8 +51,15 @@ Route::get('/dashboard', function () {
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('/', 'App\Http\Controllers\Admin\HomeController@index');
+    Route::get('/by-all', 'App\Http\Controllers\Admin\HomeController@byAll')->name("dashboard.byAll");
+    Route::get('/by-category', 'App\Http\Controllers\Admin\HomeController@byCategory')->name("dashboard.byCategory");
+
+    Route::get("data/brands", [BrandController::class, 'brands']);
+    Route::post("categories/{category}/brands", [CategoryController::class, 'updateBrands']);
 
     Route::resource('distributors', DistributorController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('brands', BrandController::class);
     Route::resource('warranties', WarrantyController::class);
     Route::resource('settings', SettingController::class);
 

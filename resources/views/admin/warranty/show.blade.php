@@ -47,11 +47,16 @@
                     <td width="150">Nama Barang</td>
                     <td>: {{$warranty->nama_barang}}</td>
                 </tr>
-                @if ($warranty->type=='warranty')
                 <tr>
-                    <td width="150">Merk Barang</td>
-                    <td>: {{$warranty->merk_barang}}</td>
+                    <td width="150">Kategori</td>
+                    <td>: {{$warranty->category?$warranty->category->name:'-'  }}</td>
                 </tr>
+                <tr>
+                    <td width="150">Merk</td>
+                    <td>: {{$warranty->brand?$warranty->brand->name:'-'  }}</td>
+                </tr>
+
+                @if ($warranty->type=='warranty')
                 @if ($warranty->distributor)
                 <tr>
                     <td width="150">Dsitributor</td>

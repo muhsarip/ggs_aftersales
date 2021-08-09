@@ -63,6 +63,23 @@ Service
 
                 <div class="col-lg-6 col-12">
                     <div class="form-group">
+                        <label for="">Kategori <sup>*</sup></label>
+                        <select class="form-control" name="category_id" id="category_id">
+                            <option value="" selected>- Pilih kategori -</option>
+                            @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Merk <sup>*</sup></label>
+                        <select class="form-control" name="brand_id" id="brand_id">
+                            <option value="">- Pilih merk -</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="">Nama Barang <sup>*</sup></label>
                         <input type="text" class="form-control" name="nama_barang" required>
                     </div>
@@ -91,9 +108,10 @@ Service
                                     </button>
                                 </div>
                             </div>
-                
+
                             <div class="form-group mb-4">
-                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha"
+                                    name="captcha">
                             </div>
                         </div>
                     </div>
@@ -124,6 +142,8 @@ Service
 
 @section('script')
 <script>
+    $("#agreeForm").hide();
+    $("#actionForm").show();
     $("#agreeButton").on("click",function(){
         if($('#agree').is(":checked")){
             $("#agreeForm").hide();
@@ -208,6 +228,20 @@ Service
             contentDesktop.addClass("d-none d-md-block")
         }
         
+    });
+
+    // on change category, show brand
+    $("#category_id").on("change",function(e){
+        let categoryId = e.target.value
+        if(categoryId){
+            $.LoadingOverlay("show");
+            $.get(`/categories/${categoryId}/brands`, function(data, status){
+                $.LoadingOverlay("hide");
+                data.map(function(item){
+                    $("#brand_id").append(`<option value="${item.id}" >${item.name}</option>`)
+                })
+            });
+        }
     });
 </script>
 @endsection

@@ -21,13 +21,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Nama Barang</label>
-                    <input type="text" class="form-control" readonly value="{{$warranty->nama_barang}}">
+                    <label for="">Kategori</label>
+                    <input type="text" class="form-control" readonly
+                        value="{{$warranty->category?$warranty->category->name:'-'  }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="">Merk Barang</label>
-                    <input type="text" class="form-control" readonly value="{{$warranty->merk_barang}}">
+                    <label for="">Merk</label>
+                    <input type="text" class="form-control" readonly
+                        value="{{$warranty->brand?$warranty->brand->name:'-'  }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Nama Barang</label>
+                    <input type="text" class="form-control" readonly value="{{$warranty->nama_barang}}">
                 </div>
 
                 <div class="form-group">

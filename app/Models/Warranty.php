@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Models\Brand;
+use App\Models\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +12,8 @@ class Warranty extends Model
     use HasFactory;
 
     protected $fillable = [
+        "category_id",
+        "brand_id",
         "type",
         "case_id",
         "rma_id",
@@ -33,13 +37,23 @@ class Warranty extends Model
     protected $appends = ['no'];
 
 
-    public function distributor(){
-        return $this->belongsTo(Distributor::class,"distributor_id");
+    public function distributor()
+    {
+        return $this->belongsTo(Distributor::class, "distributor_id");
     }
 
-    public function getNoAttribute(){
-        return $this->ser_id == ''?$this->rma_id:$this->ser_id;
+    public function getNoAttribute()
+    {
+        return $this->ser_id == '' ? $this->rma_id : $this->ser_id;
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 }

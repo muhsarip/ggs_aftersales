@@ -70,6 +70,7 @@ class WarrantyController extends Controller
     public function edit(Warranty $warranty)
     {
         $distributors = Distributor::all();
+        $warranty->load(['category', 'brand']);
         return view('admin.warranty.edit', compact('warranty', 'distributors'));
     }
 

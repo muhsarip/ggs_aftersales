@@ -8,22 +8,25 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function index( Warranty $warranty){
-        return view('frontend.status',compact('warranty'));
+    public function index(Warranty $warranty)
+    {
+
+        return view('frontend.status', compact('warranty'));
     }
 
-    public function check(Request $request){
+    public function check(Request $request)
+    {
 
-        if($request->number == ''){
-            return redirect(route('page.status'))->with(['errors'=>'No. RMA/ No. Service tidak ditemukan']);
+        if ($request->number == '') {
+            return redirect(route('page.status'))->with(['errors' => 'No. RMA/ No. Service tidak ditemukan']);
         }
 
-        $warranty = Warranty::where('rma_id',$request->number)->orWhere("ser_id",$request->number)->where("email",$request->email)->first();
+        $warranty = Warranty::with(['brand', 'category'])->where('rma_id', $request->number)->orWhere("ser_id", $request->number)->where("email", $request->email)->first();
 
-        if(!$warranty){
-            return redirect(route('page.status'))->with(['errors'=>'No. RMA/ No. Service tidak ditemukan']);
+        if (!$warranty) {
+            return redirect(route('page.status'))->with(['errors' => 'No. RMA/ No. Service tidak ditemukan']);
         }
 
-        return redirect(route('page.status'))->with(['instance'=>$warranty]);
+        return redirect(route('page.status'))->with(['instance' => $warranty]);
     }
 }

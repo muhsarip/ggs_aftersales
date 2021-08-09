@@ -99,7 +99,8 @@
                             <td class="content-block"
                                 style="font-family: sans-serif;font-size: 12px;vertical-align: top;padding-bottom: 10px;padding-top: 10px;color: #999999;text-align: center;">
 
-                                <br> This email send automaticly by system, please do not reply this email. <br><br><br>
+                                <br> This email send automatically by system, please do not reply this email.
+                                <br><br><br>
                                 <span class="apple-link" style="color: #999999;font-size: 12px;text-align: center;">
                                     GoodGamingShop, Mangga 2 Mall Lt. 2 No 2A
                                     Jakarta Pusat – Indonesia 10730</span>
