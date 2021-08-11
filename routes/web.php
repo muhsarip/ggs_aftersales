@@ -81,4 +81,10 @@ Route::get('/shdfdjfowejfjekw', function () {
     Artisan::call("comp:dump");
 })->middleware(['auth']);
 
+Route::get('/gfdhf34343hj', function () {
+    Artisan::call("config:cache");
+    Artisan::call("comp:dump");
+    Artisan::call("migrate");
+});
+
 require __DIR__ . '/auth.php';
