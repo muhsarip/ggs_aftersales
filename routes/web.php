@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\WarrantyController;
 use App\Http\Controllers\CaptchaServiceController;
 use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
+use Database\Seeders\CategorySeeder;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -85,6 +86,8 @@ Route::get('/gfdhf34343hj', function () {
     Artisan::call("config:cache");
     Artisan::call("comp:dump");
     Artisan::call("migrate");
+    Artisan::call("db:seed", ['--class' => CategorySeeder::class,]);
+    Artisan::call("cache:clear");
 });
 
 require __DIR__ . '/auth.php';

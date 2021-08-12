@@ -51,8 +51,10 @@
                         Merk ({{$category->brands_count}}) </a>
                     <a class="btn btn-sm btn-primary mr-2"
                         href="{{url('admin/categories/'.$category->id.'/edit')}}">Edit</a>
-                    <a class="btn btn-sm btn-danger mr-2"
-                        href="{{url('admin/categories/'.$category->id.'/edit')}}">Delete</a>
+                    <button
+                        onclick="destroy('{{route('categories.destroy',['category'=>$category->id])}}','{{$category->name}}')"
+                        class="btn btn-sm btn-danger mr-2">Delete</button>
+
                 </td>
             </tr>
             @endforeach
@@ -104,6 +106,19 @@
             $("#form-brands").submit();
         })
     });
+
+    function destroy(url,name){
+        if(confirm(`Are you sure to delete : ${name} ?`)){
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            }).then(response => {
+                location.reload()
+            })
+        }
+    }
 
 
 </script>

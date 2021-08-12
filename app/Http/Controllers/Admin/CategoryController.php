@@ -105,9 +105,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $deleted = $category;
+        $category->delete();
+        return response()->json(['ok']);
     }
 
     public function updateBrands(Request $request, Category $category)

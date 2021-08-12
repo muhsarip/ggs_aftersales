@@ -47,7 +47,8 @@
                 </td>
                 <td class="text-right">
                     <a class="btn btn-sm btn-primary mr-2" href="{{url('admin/brands/'.$brand->id.'/edit')}}">Edit</a>
-                    <a class="btn btn-sm btn-danger mr-2" href="{{url('admin/brands/'.$brand->id.'/edit')}}">Delete</a>
+                    <button onclick="destroy('{{route('brands.destroy',['brand'=>$brand->id])}}','{{$brand->name}}')"
+                        class="btn btn-sm btn-danger mr-2">Delete</button>
                 </td>
             </tr>
             @endforeach
@@ -89,6 +90,17 @@
 
 @section('script')
 <script>
-
+    function destroy(url,name){
+        if(confirm(`Are you sure to delete : ${name} ?`)){
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            }).then(response => {
+                location.reload()
+            })
+        }
+    }
 </script>
 @endsection
